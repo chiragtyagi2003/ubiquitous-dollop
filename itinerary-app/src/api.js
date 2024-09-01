@@ -68,3 +68,29 @@ export const getPlaces = async (location_name, type) => {
     throw error.response ? error.response.data : new Error('Network error');
   }
 };
+
+
+export const getWeather = async (location) => {
+    try {
+      const response = await axios.get(`${API_URL}/get-weather`, {
+        params: {
+          location
+        }
+      });
+      return response.data; // Return the weather data
+    } catch (error) {
+      throw error.response ? error.response.data : new Error('Network error');
+    }
+  };
+
+// New function for fetching destination weather
+export const getDestinationWeather = async (location) => {
+    try {
+      const response = await axios.get(`${API_URL}/get-destination-weather`, {
+        params: { location },
+      });
+      return response.data;
+    } catch (error) {
+      throw error.response ? error.response.data : new Error('Network error');
+    }
+  };

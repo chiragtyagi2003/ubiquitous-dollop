@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import ExplorePlacesModal from './ExplorePlacesModal';
 import ItineraryWithPlaces from './ItineraryWithPlaces';
+import { getWeather, getDestinationWeather } from '../api'; // Import new API function
 import axios from 'axios';
 
 const ItineraryDisplay = ({ itinerary }) => {
@@ -10,6 +11,33 @@ const ItineraryDisplay = ({ itinerary }) => {
   const [selectedDay, setSelectedDay] = useState(null);
   const [placeDetails, setPlaceDetails] = useState(null);
   const [resultsModalShow, setResultsModalShow] = useState(false);
+  const [sourceWeather, setSourceWeather] = useState(null);
+  const [destinationWeather, setDestinationWeather] = useState(null);
+
+  // Fetch weather data on component mount
+  useEffect(() => {
+    if (itinerary) {
+      const mainLocation = itinerary.places ? itinerary.places.split(', ')[0] : null;
+      const { source, destination } = itinerary;
+      fetchWeather(source, destination || mainLocation);
+    }
+  }, [itinerary]);
+
+  const fetchWeather = async (source, destination) => {
+    try {
+      if (source) {
+        const sourceWeatherData = await getWeather(source);
+        setSourceWeather(sourceWeatherData);
+      }
+  
+      if (destination) {
+        const destinationWeatherData = await getDestinationWeather(destination);
+        setDestinationWeather(destinationWeatherData);
+      }
+    } catch (error) {
+      console.error('Error fetching weather:', error);
+    }
+  };
 
   const handleExplorePlaces = (day) => {
     setSelectedDay(day);
@@ -41,6 +69,31 @@ const ItineraryDisplay = ({ itinerary }) => {
   return (
     <div style={{ textAlign: 'left', marginTop: '20px', padding: '20px', borderRadius: '8px' }}>
       <h2>Your Travel Itinerary</h2>
+
+      {/* Weather Information Row */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
+        {/* Weather Information for Source */}
+        {sourceWeather && (
+          <div style={{ padding: '10px', border: '1px solid #ddd', borderRadius: '8px', backgroundColor: '#f9f9f9', flex: 1, marginRight: '10px' }}>
+            <h4>Weather in {sourceWeather.name}, {sourceWeather.sys.country}</h4>
+            <p>{sourceWeather.weather[0].description}</p>
+            <p>Temperature: {Math.round(sourceWeather.main.temp - 273.15)}°C</p>
+            <p>Humidity: {sourceWeather.main.humidity}%</p>
+            <img src={`http://openweathermap.org/img/w/${sourceWeather.weather[0].icon}.png`} alt="Weather icon" />
+          </div>
+        )}
+
+        {/* Weather Information for Destination */}
+        {destinationWeather && (
+          <div style={{ padding: '10px', border: '1px solid #ddd', borderRadius: '8px', backgroundColor: '#f9f9f9', flex: 1, marginLeft: '10px' }}>
+            <h4>Weather in {destinationWeather.name}, {destinationWeather.sys.country}</h4>
+            <p>{destinationWeather.weather[0].description}</p>
+            <p>Temperature: {Math.round(destinationWeather.main.temp - 273.15)}°C</p>
+            <p>Humidity: {destinationWeather.main.humidity}%</p>
+            <img src={`http://openweathermap.org/img/w/${destinationWeather.weather[0].icon}.png`} alt="Weather icon" />
+          </div>
+        )}
+      </div>
 
       {/* Budget Breakdown */}
       {budget && budget.breakdown && (
