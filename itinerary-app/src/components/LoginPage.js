@@ -14,10 +14,11 @@ function LoginPage() {
     try {
       const response = await login(email, password);
       console.log('Login successful:', response);
-      toast.success('Login successful!');  // Display a success notification
-      setTimeout(() => navigate('/'), 2000); // Redirect after 2 seconds
+      toast.success('Login successful!');
+      setTimeout(() => navigate('/home'), 2000); // Redirect after 2 seconds
     } catch (error) {
       setError(error.message || 'An error occurred during login.');
+      toast.error('Login failed. Please try again.');
     }
   };
 
@@ -39,9 +40,13 @@ function LoginPage() {
         onChange={(e) => setPassword(e.target.value)}
       />
       <br />
-      <button onClick={handleLogin} style={{ margin: '10px' }}>Login</button>
+      <button onClick={handleLogin} style={{ margin: '10px' }}>
+        Login
+      </button>
       <br />
-      <button onClick={() => navigate('/register')} style={{ margin: '10px' }}>Register</button>
+      <button onClick={() => navigate('/register')} style={{ margin: '10px' }}>
+        Register
+      </button>
       
       <ToastContainer />
     </div>
