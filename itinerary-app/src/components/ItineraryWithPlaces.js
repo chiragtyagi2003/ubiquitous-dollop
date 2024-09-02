@@ -23,13 +23,6 @@ const ItineraryWithPlaces = ({ show, onHide, placeDetails }) => {
                   <strong>Type:</strong> {place.types.join(', ')}
                 </Card.Text>
               </Card.Body>
-              {place.photos && place.photos.length > 0 && (
-                <Card.Img
-                  variant="top"
-                  src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${place.photos[0].photo_reference}&key=YOUR_GOOGLE_MAPS_API_KEY`}
-                  alt={place.name}
-                />
-              )}
             </Card>
           ))
         ) : (

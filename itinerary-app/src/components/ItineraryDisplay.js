@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import { faMapMarkerAlt, faSave } from '@fortawesome/free-solid-svg-icons';
 import ExplorePlacesModal from './ExplorePlacesModal';
 import ItineraryWithPlaces from './ItineraryWithPlaces';
-import { getWeather, getDestinationWeather } from '../api'; // Import new API function
+import { getWeather, getDestinationWeather, saveItinerary } from '../api'; // Import saveItinerary function
 import axios from 'axios';
 
 const ItineraryDisplay = ({ itinerary }) => {
@@ -13,6 +13,7 @@ const ItineraryDisplay = ({ itinerary }) => {
   const [resultsModalShow, setResultsModalShow] = useState(false);
   const [sourceWeather, setSourceWeather] = useState(null);
   const [destinationWeather, setDestinationWeather] = useState(null);
+  const [saving, setSaving] = useState(false);
 
   // Fetch weather data on component mount
   useEffect(() => {
@@ -59,6 +60,19 @@ const ItineraryDisplay = ({ itinerary }) => {
       console.error('Error fetching places:', error);
     }
   };
+
+//   const handleSaveItinerary = async () => {
+//     setSaving(true);
+//     try {
+//       await saveItinerary(itinerary);
+//       alert('Itinerary saved successfully!');
+//     } catch (error) {
+//       console.error('Error saving itinerary:', error);
+//       alert('Failed to save itinerary. Please try again.');
+//     } finally {
+//       setSaving(false);
+//     }
+//   };
 
   if (!itinerary) {
     return <p>No itinerary available</p>;
@@ -129,8 +143,8 @@ const ItineraryDisplay = ({ itinerary }) => {
                 <div style={{ position: 'relative', marginRight: '20px' }}>
                   <div
                     style={{
-                      width: '40px',
-                      height: '40px',
+                      width: '80px',
+                      height: '80px',
                       borderRadius: '50%',
                       backgroundColor: '#007bff',
                       color: '#fff',
@@ -147,10 +161,10 @@ const ItineraryDisplay = ({ itinerary }) => {
                     <div
                       style={{
                         position: 'absolute',
-                        top: '40px',
+                        top: '75px',
                         left: '50%',
                         width: '2px',
-                        height: '100%',
+                        height: '280px',
                         backgroundColor: '#007bff',
                       }}
                     />
@@ -211,13 +225,27 @@ const ItineraryDisplay = ({ itinerary }) => {
         />
       )}
 
-      {/* Notes */}
-      {notes && (
-        <div>
-          <h3>Notes</h3>
-          <p>{notes}</p>
-        </div>
-      )}
+      {/* Save Itinerary Button */}
+      <div style={{ textAlign: 'center', marginTop: '20px' }}>
+        <button 
+        //   onClick={handleSaveItinerary} 
+          style={{ 
+            padding: '10px 20px', 
+            fontSize: '18px', 
+            color: '#fff', 
+            backgroundColor: '#28a745', 
+            border: 'none', 
+            borderRadius: '5px', 
+            cursor: 'pointer', 
+            boxShadow: '0 5px 15px rgba(40, 167, 69, 0.3)',
+            transition: 'background-color 0.3s',
+          }}
+          disabled={saving}
+        >
+          {saving ? 'Saving...' : 'Save Itinerary'}
+          <FontAwesomeIcon icon={faSave} style={{ marginLeft: '10px' }} />
+        </button>
+      </div>
     </div>
   );
 };

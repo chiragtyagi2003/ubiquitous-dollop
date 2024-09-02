@@ -2,9 +2,11 @@ import axios from 'axios';
 
 const API_URL = 'http://127.0.0.1:8080'; // Replace with your Flask backend URL
 
-export const register = async (email, password) => {
+
+export const register = async (username, email, password) => {
   try {
     const response = await axios.post(`${API_URL}/register`, {
+      username,  // Add the username parameter
       email,
       password,
     });
@@ -13,6 +15,7 @@ export const register = async (email, password) => {
     throw error.response ? error.response.data : new Error('Network error');
   }
 };
+
 
 export const login = async (email, password) => {
   try {

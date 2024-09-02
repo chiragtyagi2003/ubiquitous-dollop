@@ -39,53 +39,104 @@ function ItineraryFormPage() {
     }
   };
 
+  const styles = {
+    container: {
+      display: 'flex',
+      marginTop: '35px',
+      padding: '40px',
+      backgroundImage: 'url(https://i.pinimg.com/originals/d7/ae/01/d7ae0170d3d5ffcbaa7f02fdda387a3b.gif)',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      borderRadius: '15px',
+      boxShadow: '0 10px 30px rgba(0, 0, 0, 0.1)',
+    },
+    formContainer: {
+      flex: 1,
+      padding: '20px',
+      borderRight: '1px solid #ddd',
+      backgroundColor: 'rgba(255, 255, 255, 0.85)',
+      borderRadius: '15px 0 0 15px',
+      boxShadow: '0 0 10px rgba(0, 0, 0, 0.4)',
+    },
+    header: {
+      fontSize: '28px',
+      fontWeight: 'bold',
+      marginBottom: '20px',
+      color: '#333',
+    },
+    input: {
+      margin: '10px',
+      width: '100%',
+      padding: '10px',
+      borderRadius: '5px',
+      border: '1px solid #ddd',
+      fontSize: '16px',
+    },
+    button: {
+      margin: '20px',
+      padding: '15px 30px',
+      fontSize: '18px',
+      color: '#fff',
+      backgroundColor: '#28a745',
+      border: 'none',
+      borderRadius: '5px',
+      cursor: 'pointer',
+      boxShadow: '0 5px 15px rgba(40, 167, 69, 0.3)',
+      transition: 'background-color 0.3s',
+    },
+    displayContainer: {
+      flex: 2,
+      padding: '20px',
+      maxHeight: '80vh',
+      overflowY: 'auto',
+      backgroundColor: 'rgba(255, 255, 255, 0.85)',
+      borderRadius: '0 15px 15px 0',
+      boxShadow: '0 0 10px rgba(0, 0, 0, 0.4)',
+    },
+  };
+
   return (
-    <div style={{ display: 'flex', marginTop: '50px' }}>
+    <div style={styles.container}>
       {/* Left Panel - Form */}
-      <div style={{ flex: 1, padding: '20px', borderRight: '1px solid #ddd' }}>
-        <h2>Create Your Travel Itinerary</h2>
-        <div style={{ marginTop: '20px' }}>
+      <div style={styles.formContainer}>
+        <h2 style={styles.header}>Create Your Travel Itinerary</h2>
+        <div>
           <input
             type="number"
             placeholder="Budget"
             value={budget}
             onChange={(e) => setBudget(e.target.value)}
-            style={{ margin: '10px', width: '100%' }}
+            style={styles.input}
           />
-          <br />
           <input
             type="text"
             placeholder="Interests (comma separated)"
             value={interests}
             onChange={(e) => setInterests(e.target.value)}
-            style={{ margin: '10px', width: '100%' }}
+            style={styles.input}
           />
-          <br />
           <input
             type="number"
             placeholder="Duration (days)"
             value={duration}
             onChange={(e) => setDuration(e.target.value)}
-            style={{ margin: '10px', width: '100%' }}
+            style={styles.input}
           />
-          <br />
           <input
             type="text"
             placeholder="Source"
             value={source}
             onChange={(e) => setSource(e.target.value)}
-            style={{ margin: '10px', width: '100%' }}
+            style={styles.input}
           />
-          <br />
           <input
             type="text"
             placeholder="Destination (optional)"
             value={destination}
             onChange={(e) => setDestination(e.target.value)}
-            style={{ margin: '10px', width: '100%' }}
+            style={styles.input}
           />
-          <br />
-          <button onClick={handleGenerateItinerary} style={{ margin: '20px' }} disabled={loading}>
+          <button onClick={handleGenerateItinerary} style={styles.button} disabled={loading}>
             {loading ? 'Generating...' : 'Generate Itinerary'}
           </button>
         </div>
@@ -93,7 +144,7 @@ function ItineraryFormPage() {
       </div>
 
       {/* Right Panel - Itinerary Display */}
-      <div style={{ flex: 2, padding: '20px', maxHeight: '80vh', overflowY: 'auto' }}>
+      <div style={styles.displayContainer}>
         {itinerary ? (
           <ItineraryDisplay itinerary={itinerary} />
         ) : (
