@@ -10,6 +10,8 @@ function LoginPage() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
+
+  // function to handle login button click
   const handleLogin = async () => {
     try {
       const response = await login(email, password);

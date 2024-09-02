@@ -14,6 +14,8 @@ function ItineraryFormPage() {
   const [loading, setLoading] = useState(false);
   const [itinerary, setItinerary] = useState(null);
 
+
+  // function to handle generate itineray button click
   const handleGenerateItinerary = async () => {
     if (!budget || !interests || !duration || !source) {
       toast.error('Please fill in all required fields.');

@@ -11,6 +11,8 @@ function RegisterPage() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
+
+  // function to handle register button click
   const handleRegister = async () => {
     try {
       const response = await register(username, email, password);

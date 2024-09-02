@@ -11,8 +11,10 @@ const ProfilePage = () => {
   const [error, setError] = useState(null);
   const [expandedIndex, setExpandedIndex] = useState(null); // Track the expanded itinerary
 
-  const email = localStorage.getItem('email');
+  const email = localStorage.getItem('email');  //  access user email from local browser storage
 
+
+  // dropdown effect for saved itineraies
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -32,6 +34,7 @@ const ProfilePage = () => {
     fetchUserData();
   }, [email]);
 
+  
   const handleLogout = () => {
     localStorage.removeItem('email');
     navigate('/login');

@@ -27,6 +27,12 @@ const ItineraryDisplay = ({ itinerary }) => {
     }
   }, [itinerary]);
 
+
+  /**
+ * Fetches weather data for the source and destination locations.
+ * @param {string} source - The source location to get weather data for.
+ * @param {string} [destination] - The destination location to get weather data for.
+ */
   const fetchWeather = async (source, destination) => {
     try {
       if (source) {
@@ -43,11 +49,22 @@ const ItineraryDisplay = ({ itinerary }) => {
     }
   };
 
+
+  /**
+ * Opens a modal to explore places for a selected day.
+ * @param {string} day - The day for which to explore places.
+ */
   const handleExplorePlaces = (day) => {
     setSelectedDay(day);
     setModalShow(true);
   };
 
+
+  /**
+ * Fetches places based on the location name and type, and displays the results.
+ * @param {string} locationName - The name of the location to search for places.
+ * @param {string} type - The type of place to search for (e.g., restaurant, park).
+ */
   const handleExplore = async (locationName, type) => {
     try {
       const response = await axios.get(`http://127.0.0.1:8080/get-places`, {
@@ -64,6 +81,10 @@ const ItineraryDisplay = ({ itinerary }) => {
     }
   };
 
+  /**
+ * Saves the current itinerary to the server.
+ * Retrieves the user email from localStorage and sends the itinerary data to be saved.
+ */
   const handleSaveItinerary = async () => {
     setSaving(true);
     try {
