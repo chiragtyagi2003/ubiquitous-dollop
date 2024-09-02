@@ -18,7 +18,7 @@ function WelcomePage() {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundImage: 'url(https://i.pinimg.com/564x/b3/0a/7f/b30a7f15a07a1ccd7a7f98a6c40b95ca.jpg)', // Replace with your own high-resolution image URL
+      backgroundImage: 'url(https://i.pinimg.com/originals/f8/7c/e4/f87ce4a781dba5574176e7836c18b34a.gif)', // Replace with your own high-resolution image URL
       backgroundPosition: 'center',
       backgroundAttachment: 'fixed',
     },

@@ -3,6 +3,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { generateItinerary, generateItineraryWithDestination } from '../api';
 import ItineraryDisplay from './ItineraryDisplay';
 import 'react-toastify/dist/ReactToastify.css';
+import Navbar from './Navbar';  // Import the Navbar component
 
 function ItineraryFormPage() {
   const [budget, setBudget] = useState('');
@@ -42,13 +43,13 @@ function ItineraryFormPage() {
   const styles = {
     container: {
       display: 'flex',
-      marginTop: '35px',
+      marginTop: '120px',
       padding: '40px',
       backgroundImage: 'url(https://i.pinimg.com/originals/d7/ae/01/d7ae0170d3d5ffcbaa7f02fdda387a3b.gif)',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       borderRadius: '15px',
-      boxShadow: '0 10px 30px rgba(0, 0, 0, 0.1)',
+      boxShadow: '0 10px 30px rgba(0, 0, 0, 0.5)',
     },
     formContainer: {
       flex: 1,
@@ -97,6 +98,7 @@ function ItineraryFormPage() {
 
   return (
     <div style={styles.container}>
+        <Navbar /> {/* Include the Navbar component here */}
       {/* Left Panel - Form */}
       <div style={styles.formContainer}>
         <h2 style={styles.header}>Create Your Travel Itinerary</h2>

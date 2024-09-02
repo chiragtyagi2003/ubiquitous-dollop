@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getUserInfo, fetchItineraries } from '../api'; // Import the API calls
+import Navbar from './Navbar';  // Import the Navbar component
 
 const ProfilePage = () => {
   const navigate = useNavigate();
@@ -47,31 +48,12 @@ const ProfilePage = () => {
   const styles = {
     container: {
       height: '100vh',
-      backgroundImage: 'url(https://i.pinimg.com/originals/31/41/6f/31416f0c6f763c947d08e6406c959cb7.gif)',
+      backgroundImage: 'url(https://i.pinimg.com/originals/71/e2/9e/71e29ed74f14223911310d9002443cbf.gif)',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       display: 'flex',
       flexDirection: 'column',
       overflow: 'hidden', // Prevent the background from scrolling
-    },
-    navbar: {
-      width: '100%',
-      backgroundColor: 'rgba(0, 0, 0, 0.7)',
-      padding: '10px 20px',
-      position: 'absolute',
-      top: 0,
-      display: 'flex',
-      justifyContent: 'flex-end',
-    },
-    navButton: {
-      padding: '10px 20px',
-      fontSize: '16px',
-      color: '#fff',
-      backgroundColor: 'transparent',
-      border: 'none',
-      cursor: 'pointer',
-      marginLeft: '15px',
-      transition: 'background-color 0.3s',
     },
     content: {
       display: 'flex',
@@ -147,11 +129,7 @@ const ProfilePage = () => {
 
   return (
     <div style={styles.container}>
-      <div style={styles.navbar}>
-        <button onClick={handleHome} style={styles.navButton}>Home</button>
-        <button style={styles.navButton}>Profile</button>
-        <button onClick={handleLogout} style={styles.navButton}>Logout</button>
-      </div>
+       <Navbar /> {/* Include the Navbar component here */}
 
       <div style={styles.content}>
         {loading ? (

@@ -4,6 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUser, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import Navbar from './Navbar';  // Import the Navbar component
 
 function HomePage() {
   const navigate = useNavigate();
@@ -34,31 +35,6 @@ function HomePage() {
       padding: '20px',
       backgroundImage: 'url(https://i.pinimg.com/originals/31/41/6f/31416f0c6f763c947d08e6406c959cb7.gif)',
       backgroundPosition: 'center',
-    },
-    navbar: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      padding: '10px 20px',
-      backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semi-transparent background
-      color: '#fff',
-      position: 'fixed',
-      width: '100%',
-      top: 0,
-      left: 0,
-      zIndex: 1000,
-    },
-    navButton: {
-      backgroundColor: 'transparent',
-      border: 'none',
-      color: '#fff',
-      cursor: 'pointer',
-      fontSize: '18px',
-      display: 'flex',
-      alignItems: 'center',
-      transition: 'color 0.3s',
-    },
-    navButtonIcon: {
-      marginRight: '8px',
     },
     header: {
       fontSize: '62px', // Slightly larger font size
@@ -162,34 +138,24 @@ function HomePage() {
       fontWeight: 'bold',
       color: '#333',
     },
+    footer: {
+        backgroundColor: '#333',
+        color: '#fff',
+        textAlign: 'center',
+        padding: '10px 0',
+        marginTop: '40px',
+        position: 'relative',
+        bottom: 0,
+        width: '100%',
+      },
+      footerText: {
+        fontSize: '14px',
+      },
   };
 
   return (
     <div style={styles.body}>
-      <nav style={styles.navbar}>
-        <button 
-          onClick={() => navigate('/home')} 
-          style={styles.navButton}
-        >
-          <FontAwesomeIcon icon={faHome} style={styles.navButtonIcon} />
-          Home
-        </button>
-        <button 
-          onClick={handleProfile} 
-          style={styles.navButton}
-        >
-          <FontAwesomeIcon icon={faUser} style={styles.navButtonIcon} />
-          Profile
-        </button>
-        <button 
-          onClick={handleLogout} 
-          style={styles.navButton}
-        >
-          <FontAwesomeIcon icon={faSignOutAlt} style={styles.navButtonIcon} />
-          Logout
-        </button>
-      </nav>
-
+       <Navbar /> {/* Include the Navbar component here */}
       <div style={styles.container}>
         <h1 style={styles.header}>Musafir - <i>Har Safar m Apka Humsafar</i></h1>
         <p style={styles.quote}>"Travel is the only thing you buy that makes you richer."</p>
@@ -231,6 +197,10 @@ function HomePage() {
             <p style={styles.testimonialAuthor}>- A Satisfied Traveler</p>
           </div>
         </div>
+
+        <footer style={styles.footer}>
+        <p style={styles.footerText}>© 2024 Musafir. All rights reserved.</p>
+      </footer>
 
         <ToastContainer />
       </div>
