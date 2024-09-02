@@ -14,6 +14,7 @@ function LoginPage() {
     try {
       const response = await login(email, password);
       console.log('Login successful:', response);
+      localStorage.setItem('email', email); // Store email in localStorage
       toast.success('Login successful!');
       setTimeout(() => navigate('/home'), 2000); // Redirect after 2 seconds
     } catch (error) {
